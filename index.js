@@ -72,7 +72,7 @@ const contributionsCard = document.getElementById("num-contributions");
 // use reduce() to count the number of total contributions by summing the backers
  
 const totalContributions = GAMES_JSON.reduce((acc, game) => acc + game.backers, 0);
-    contributionsCard.innerHTML = `<p>Total Contributions: ${totalContributions}</p>`;
+    contributionsCard.innerHTML = `<p>Total Contributions: $${totalContributions}</p>`;
 
 // set the inner HTML using a template literal and toLocaleString to get a number with commas
 
@@ -80,7 +80,7 @@ const totalContributions = GAMES_JSON.reduce((acc, game) => acc + game.backers, 
 // grab the amount raised card, then use reduce() to find the total amount raised
 const raisedCard = document.getElementById("total-raised");
  const totalRaised = GAMES_JSON.reduce((acc, total) => acc + total.pledged, 0);
- raisedCard.innerHTML = `<p> Total Pledged Amount: ${totalRaised}</p>`;
+ raisedCard.innerHTML = `<p> Total Pledged Amount: $${totalRaised}</p>`;
 
 // set inner HTML using template literal
 
@@ -95,7 +95,6 @@ gamesCard.innerHTML = `<p>Total Games: ${totalgames}</p>`;
  * total number of contributions, amount donated, and number of games on the site.
  * Skills used: functions, filter
 */
-
 
 filterUnfundedOnly();
 
@@ -177,6 +176,19 @@ const secondGameContainer = document.getElementById("second-game");
 const sortedGames =  GAMES_JSON.sort( (item1, item2) => {
     return item2.pledged - item1.pledged;
 });
+
+const [topFundedGame, secondTopFundedGame, ...remainingGames] = sortedGames;
+
+const topGameElement = document.createElement('p');
+topGameElement.textContent = `Top Funded Game: ${topFundedGame.name}`;
+firstGameContainer.appendChild(topGameElement);
+
+const secondGameElement = document.createElement('p');
+secondGameElement.textContent = `Second Top Funded Game: ${secondTopFundedGame.name}`;
+secondGameContainer.appendChild(secondGameElement);
+
+// Now topFundedGame and secondTopFundedGame contain the top two most funded games, respectively
+
 
 // use destructuring and the spread operator to grab the first and second games
 
